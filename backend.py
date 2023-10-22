@@ -1,22 +1,30 @@
 import yfinance as yf
+import json
 
 def main():
     tickers = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "BRK-A", "FB", "TSM", "NVDA", "JPM", "JNJ", "V", "PG", "UNH", "MA", "HD", "BAC", "INTC", "VZ", "DIS"]
+    results = []
     
     for ticker in tickers:
         ticker_info = get_ticker(ticker)
-        print(f"Ticker: {ticker}")
         if ticker_info:
-            print("Ticker Name:", ticker_info.get('shortName', 'N/A'))
-            print("Current Stock Price:", ticker_info.get('currentPrice', 'N/A'))
-            print("Market Cap:", ticker_info.get('marketCap', 'N/A'))
-            print("12-Month Revenue:", ticker_info.get('totalRevenue', 'N/A'))
-            print("YoY Revenue Growth:", ticker_info.get('revenueGrowth', 'N/A'))
-            print("Gross Profit (12-Month):", ticker_info.get('grossProfits', 'N/A'))
-            print("Net Profit (12-Month):", ticker_info.get('netIncomeToCommon', 'N/A'))
+            results.append({
+                "ticker": ticker,
+                "name": ticker_info.get('shortName', 'N/A'),
+                "currentPrice": ticker_info.get('currentPrice', 'N/A'),
+                "marketCap": ticker_info.get('marketCap', 'N/A'),
+                "revenue": ticker_info.get('totalRevenue', 'N/A'),
+                "revenueGrowth": ticker_info.get('revenueGrowth', 'N/A'),
+                "grossProfits": ticker_info.get('grossProfits', 'N/A'),
+                "netIncome": ticker_info.get('netIncomeToCommon', 'N/A')
+            })
         else:
-            print(f"Unable to fetch data for the ticker: {ticker}")
-        print("\n")
+            results.append({
+                "ticker": ticker,
+                "error": f"Unable to fetch data for the ticker: {ticker}"
+            })
+    
+    return json.dumps(results)
 
 def get_ticker(ticker):
     ticker = yf.Ticker(ticker)
@@ -24,4 +32,4 @@ def get_ticker(ticker):
     return info_data
 
 if __name__ == '__main__':
-    main()
+    print(main())
