@@ -1,41 +1,18 @@
+//
+//  Finfo_2App.swift
+//  Finfo_2
+//
+//  Created by Ayat Noor on 10/21/23.
+//
+
 import SwiftUI
 
-struct ContentView: View {
-    @State private var pythonOutput: String = ""
-    
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-            Text(pythonOutput)
-        }
-        .onAppear {
-            runPythonScript()
-        }
-        .padding()
-    }
-    
-    func runPythonScript() {
-        let task = Process()
-        task.launchPath = "/usr/bin/python3" // Set the path to your Python interpreter
-        task.arguments = ["backend.py"] // Assumes that backend.py is in the same directory
-        
-        let pipe = Pipe()
-        task.standardOutput = pipe
-        
-        task.launch()
-        
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        if let output = String(data: data, encoding: .utf8) {
-            pythonOutput = output
+@main
+struct Finfo_2App: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}

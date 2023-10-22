@@ -1,42 +1,20 @@
-import SwiftUI
-import Foundation // Import Foundation for Process
+//
+//  SwiftUIView_for_data.swift
+//  Finfo_2
+//
+//  Created by Ayat Noor on 10/21/23.
+//
 
-struct ContentView: View {
-    @State private var pythonOutput: String = ""
-    
+import SwiftUI
+
+struct SwiftUIView_for_data: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-            Text(pythonOutput)
-        }
-        .onAppear {
-            runPythonScript()
-        }
-        .padding()
-    }
-    
-    func runPythonScript() {
-        let task = Process()
-        task.launchPath = "/usr/bin/python3" // Set the path to your Python interpreter
-        task.arguments = ["backend.py"] // Assumes that backend.py is in the same directory
-        
-        let pipe = Pipe()
-        task.standardOutput = pipe
-        
-        task.launch()
-        
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        if let output = String(data: data, encoding: .utf8) {
-            pythonOutput = output
-        }
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct SwiftUIView_for_data_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        SwiftUIView_for_data()
     }
 }
