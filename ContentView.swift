@@ -1,5 +1,4 @@
 import SwiftUI
-import PythonKit
 
 struct ContentView: View {
     @State private var stockInfo: [Stock] = []
@@ -64,3 +63,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

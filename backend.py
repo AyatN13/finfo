@@ -2,7 +2,7 @@ import yfinance as yf
 import json
 
 def main():
-    tickers = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "BRK-A", "FB", "TSM", "NVDA", "JPM", "JNJ", "V", "PG", "UNH", "MA", "HD", "BAC", "INTC", "VZ", "DIS"]
+    tickers = ["AAPL", "MSFT"]
     results = []
     
     for ticker in tickers:
